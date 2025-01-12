@@ -8,7 +8,7 @@ DEBI-Application is a JavaFX-based social media application named "Fakebook". It
 
 - User Signup
 - User Login
-- Navigation between primary, secondary, and home views
+- Navigation between login, signup and home views
 
 ## Prerequisites
 
