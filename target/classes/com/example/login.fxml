@@ -18,6 +18,7 @@
     <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
     <PasswordField fx:id="passwordField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-    <Button text="Login" onAction="#handleLoginButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Button text="Login" fx:id="loginButton" onAction="#handleLoginButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
     <Button text="Back to Home" onAction="#switchToHome" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
 </GridPane>

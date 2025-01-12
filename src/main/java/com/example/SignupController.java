@@ -11,9 +11,12 @@ import java.util.Base64;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class SignupController {
 
@@ -44,6 +47,7 @@ public class SignupController {
                 statement.setString(2, hashedPassword);
                 statement.executeUpdate();
                 System.out.println("User signed up with username: " + username);
+                switchToHome(username);
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Error signing up user.");
@@ -60,6 +64,19 @@ public class SignupController {
             return Base64.getEncoder().encodeToString(hash);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error hashing password", e);
+        }
+    }
+
+    private void switchToHome(String username) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+            Scene scene = new Scene(loader.load());
+            HomeController controller = loader.getController();
+            controller.setUserName(username);
+            Stage stage = (Stage) signUpButton.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

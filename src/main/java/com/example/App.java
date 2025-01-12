@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -13,8 +14,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary").load(), 640, 480);
+        scene = new Scene(loadFXML("primary").load(), 800, 600);
         stage.setScene(scene);
+        stage.setTitle("Fakebook Application");
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("icon.png")));
         stage.show();
     }
 
