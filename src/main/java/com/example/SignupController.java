@@ -25,6 +25,9 @@ public class SignupController {
     private TextField usernameField;
 
     @FXML
+    private TextField emailField;
+
+    @FXML
     private PasswordField passwordField;
 
     @FXML
@@ -39,23 +42,25 @@ public class SignupController {
     @FXML
     private void handleSignUp(ActionEvent event) {
         String username = usernameField.getText();
+        String email = emailField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
         if (password.equals(confirmPassword)) {
             String hashedPassword = hashPassword(password);
             try (Connection connection = DatabaseUtil.getConnection()) {
-                String query = "INSERT INTO users (username, password) VALUES (?, ?)";
+                String query = "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1, username);
-                statement.setString(2, hashedPassword);
+                statement.setString(2, email);
+                statement.setString(3, hashedPassword);
                 statement.executeUpdate();
                 System.out.println("User signed up with username: " + username);
                 switchToHome(username);
             } catch (SQLException e) {
                 if (e.getErrorCode() == 1062) { // MySQL error code for duplicate entry
-                    System.out.println("Username already taken.");
-                    errorLabel.setText("Username already taken.");
+                    System.out.println("Username or email already taken.");
+                    errorLabel.setText("Username or email already taken.");
                 } else {
                     e.printStackTrace();
                     System.out.println("Error signing up user.");
