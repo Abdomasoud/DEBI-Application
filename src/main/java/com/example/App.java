@@ -26,6 +26,7 @@ public class App extends Application {
         stage.setMinHeight(HEIGHT);
         stage.show();
     }
+    // just comment haha
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml).load());
