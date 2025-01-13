@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,6 +34,9 @@ public class SignupController {
     private Button signUpButton;
 
     @FXML
+    private Label errorLabel;
+
+    @FXML
     private void handleSignUp(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -49,11 +53,17 @@ public class SignupController {
                 System.out.println("User signed up with username: " + username);
                 switchToHome(username);
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Error signing up user.");
+                if (e.getErrorCode() == 1062) { // MySQL error code for duplicate entry
+                    System.out.println("Username already taken.");
+                    errorLabel.setText("Username already taken.");
+                } else {
+                    e.printStackTrace();
+                    System.out.println("Error signing up user.");
+                    errorLabel.setText("Error signing up user.");
+                }
             }
         } else {
-            System.out.println("Passwords do not match.");
+            errorLabel.setText("Passwords do not match.");
         }
     }
 

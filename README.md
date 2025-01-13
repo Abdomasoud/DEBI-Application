@@ -2,7 +2,7 @@
 
 ## Overview
 
-DEBI-Application is a JavaFX-based social media application named "Fakebook". It allows users to sign up, log in, and navigate between different views.
+DEBI-Application is a JavaFX-based social media application named "Facebook". It allows users to sign up, log in, and navigate between different views.
 
 ## Features
 
@@ -27,7 +27,7 @@ DEBI-Application is a JavaFX-based social media application named "Fakebook". It
 
 2. **Configure the database:**
 
-   - Create a MySQL database named `fakebook`.
+   - Create a MySQL database named `Facebook`.
    - Update the `DatabaseUtil.java` file with your MySQL username and password.
 
 3. **Build the project:**

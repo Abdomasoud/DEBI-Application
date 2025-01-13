@@ -11,15 +11,22 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static Scene scene;
+    private static final double WIDTH = 800;
+    private static final double HEIGHT = 600;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary").load(), 800, 600);
+        scene = new Scene(loadFXML("primary").load(), WIDTH, HEIGHT);
         stage.setScene(scene);
-        stage.setTitle("Fakebook Application");
+        stage.setTitle("Facebook Application");
         stage.getIcons().add(new Image(App.class.getResourceAsStream("icon.png")));
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.setMinWidth(WIDTH);
+        stage.setMinHeight(HEIGHT);
         stage.show();
     }
+    // just comment haha
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml).load());
