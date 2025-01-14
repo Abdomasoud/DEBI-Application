@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
 
@@ -84,15 +85,30 @@ public class SignupController {
 
     private void switchToHome(String username) {
         try {
+            int userId = getUserId(username);
+            DatabaseUtil.createProfile(userId);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
             Scene scene = new Scene(loader.load());
             HomeController controller = loader.getController();
             controller.setUserName(username);
             Stage stage = (Stage) signUpButton.getScene().getWindow();
             stage.setScene(scene);
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private int getUserId(String username) throws SQLException {
+        try (Connection connection = DatabaseUtil.getConnection()) {
+            String query = "SELECT user_id FROM users WHERE name = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("user_id");
+            }
+        }
+        return -1;
     }
 
     @FXML

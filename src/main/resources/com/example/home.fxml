@@ -16,6 +16,7 @@
                 <Label text="Fakebook" style="-fx-font-size: 20; -fx-font-weight: bold;" />
                 <HBox HBox.hgrow="ALWAYS" />
                 <Label fx:id="welcomeLabel" text="Welcome, User!" />
+                <Button text="Profile" onAction="#handleProfileButtonAction" />
                 <Button text="Logout" onAction="#handleLogoutButtonAction" />
             </children>
         </HBox>

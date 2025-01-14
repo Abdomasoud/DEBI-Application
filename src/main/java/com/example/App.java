@@ -1,7 +1,6 @@
 package com.example;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,10 +25,18 @@ public class App extends Application {
         stage.setMinHeight(HEIGHT);
         stage.show();
     }
-    // just comment haha
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml).load());
+    }
+
+    static void setRoot(String fxml, int userId) throws IOException {
+        FXMLLoader loader = loadFXML(fxml);
+        scene.setRoot(loader.load());
+        if (fxml.equals("profile")) {
+            ProfileController controller = loader.getController();
+            controller.loadProfile(userId);
+        }
     }
 
     private static FXMLLoader loadFXML(String fxml) throws IOException {

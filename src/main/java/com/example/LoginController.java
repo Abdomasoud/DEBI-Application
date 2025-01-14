@@ -34,13 +34,15 @@ public class LoginController {
     @FXML
     private Label errorLabel;
 
+    public static int currentUserId;
+
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
         String name = nameField.getText();
         String password = passwordField.getText();
 
         try (Connection connection = DatabaseUtil.getConnection()) {
-            String query = "SELECT password_hash FROM users WHERE name = ?";
+            String query = "SELECT user_id, password_hash FROM users WHERE name = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
@@ -49,6 +51,7 @@ public class LoginController {
                 String storedHashedPassword = resultSet.getString("password_hash");
                 if (storedHashedPassword.equals(hashPassword(password))) {
                     System.out.println("User logged in with name: " + name);
+                    currentUserId = resultSet.getInt("user_id");
                     switchToHome(name);
                 } else {
                     System.out.println("Invalid name or password.");
