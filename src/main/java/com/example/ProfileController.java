@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -64,9 +66,23 @@ public class ProfileController {
             statement.setInt(3, LoginController.currentUserId);
             statement.executeUpdate();
             System.out.println("Profile updated for user: " + name);
+            refreshHomePage();
         } catch (SQLException e) {
             e.printStackTrace();
             errorLabel.setText("Error updating profile.");
+        }
+    }
+
+    private void refreshHomePage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+            Scene scene = new Scene(loader.load());
+            HomeController controller = loader.getController();
+            controller.setUserName(nameField.getText());
+            Stage stage = (Stage) saveButton.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
