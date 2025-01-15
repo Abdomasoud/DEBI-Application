@@ -25,14 +25,14 @@ public class DatabaseUtil {
         }
     }
 
-    public static Profile getProfile(int userId) throws SQLException {
+    public static UserProfile getProfile(int userId) throws SQLException {
         try (Connection connection = getConnection()) {
             String query = "SELECT * FROM Profiles WHERE user_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new Profile(
+                return new UserProfile(
                     resultSet.getInt("profile_id"),
                     resultSet.getInt("user_id"),
                     resultSet.getString("bio"),

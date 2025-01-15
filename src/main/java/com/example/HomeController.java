@@ -48,14 +48,14 @@ public class HomeController {
     @FXML
     private void handleProfileButtonAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("profile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("userProfile.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("User Profile");
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(welcomeLabel.getScene().getWindow());
-            ProfileController controller = loader.getController();
+            UserProfileController controller = loader.getController();
             controller.loadProfile(LoginController.currentUserId);
             stage.show();
         } catch (IOException e) {

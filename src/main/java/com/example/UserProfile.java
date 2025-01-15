@@ -1,12 +1,12 @@
 package com.example;
 
-public class Profile {
+public class UserProfile {
     private int profileId;
     private int userId;
     private String bio;
     private String profilePicture;
 
-    public Profile(int profileId, int userId, String bio, String profilePicture) {
+    public UserProfile(int profileId, int userId, String bio, String profilePicture) {
         this.profileId = profileId;
         this.userId = userId;
         this.bio = bio;

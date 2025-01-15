@@ -33,8 +33,8 @@ public class App extends Application {
     static void setRoot(String fxml, int userId) throws IOException {
         FXMLLoader loader = loadFXML(fxml);
         scene.setRoot(loader.load());
-        if (fxml.equals("profile")) {
-            ProfileController controller = loader.getController();
+        if (fxml.equals("userProfile")) {
+            UserProfileController controller = loader.getController();
             controller.loadProfile(userId);
         }
     }
