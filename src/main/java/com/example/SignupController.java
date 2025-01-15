@@ -57,6 +57,24 @@ public class SignupController {
                 statement.setString(3, hashedPassword);
                 statement.executeUpdate();
                 System.out.println("User signed up with username: " + username);
+                // Retrieve the user_id by querying the Users table
+                String userIdQuery = "SELECT user_id FROM Users WHERE name = ?";
+                PreparedStatement userIdStatement = connection.prepareStatement(userIdQuery);
+                userIdStatement.setString(1, username);
+                ResultSet resultSet = userIdStatement.executeQuery();
+                if (resultSet.next()) {
+                    int userId = resultSet.getInt("user_id");
+                    System.out.println("Retrieved user_id: " + userId);
+
+                    // Insert a profile record for the new user
+                    String profileQuery = "INSERT INTO Profiles (user_id) VALUES (?)";
+                    PreparedStatement profileStatement = connection.prepareStatement(profileQuery);
+                    profileStatement.setInt(1, userId);
+                    profileStatement.executeUpdate();
+                    System.out.println("Profile created for user_id: " + userId);
+                } else {
+                    System.out.println("User ID not found.");
+                }
                 switchToHome(username);
             } catch (SQLException e) {
                 if (e.getErrorCode() == 1062) { // MySQL error code for duplicate entry
