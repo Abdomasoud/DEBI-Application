@@ -33,7 +33,7 @@
 
     <!-- Main Content -->
     <center>
-        <HBox spacing="20.0" alignment="TOP_CENTER" style="-fx-padding: 20;">
+        <HBox spacing="20.0" alignment="TOP_LEFT" style="-fx-padding: 20;">
             <children>
                 <!-- Profile Section -->
                 <VBox spacing="15.0" alignment="TOP_LEFT" style="-fx-padding: 10; -fx-border-color: lightgray; -fx-border-width: 1;">
