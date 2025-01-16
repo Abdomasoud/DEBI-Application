@@ -16,11 +16,12 @@
             <children>
                 <Label text="Fakebook" style="-fx-font-size: 20; -fx-font-weight: bold;" />
                 <HBox HBox.hgrow="ALWAYS" />
-                <Label fx:id="welcomeLabel" text="Welcome, User!" onMouseClicked="#handleProfileClick" style="-fx-cursor: hand;" />
+                <Label fx:id="welcomeLabel" text="Welcomezz, User!" onMouseClicked="#handleProfileClick" style="-fx-cursor: hand;" />
+                <Button text="Profile" onAction="#handleProfileButtonAction" />
                 <Button text="Logout" onAction="#handleLogoutButtonAction" />
             </children>
         </HBox>
-        <VBox spacing="10.0" style="-fx-padding: 10; -fx-background-color: #e1e1e1;">
+        <!-- <VBox spacing="10.0" style="-fx-padding: 10; -fx-background-color: #e1e1e1;">
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="20.0">
                     <children>
@@ -36,7 +37,7 @@
                     </children>
                 </HBox>
             </children>
-        </VBox>
+        </VBox> -->
     </top>
 
     <!-- Main Content -->

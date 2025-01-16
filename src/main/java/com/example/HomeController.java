@@ -55,8 +55,11 @@ public class HomeController {
     @FXML
     private void handleLogoutButtonAction() {
         try {
-            LoginController.currentUserId = -1; // Reset the current user ID
-            App.setRoot("login");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setMaximized(true); // Maximize the window
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading login view.");
