@@ -55,7 +55,7 @@ DEBI-Application is a JavaFX-based social media application named "Facebook". It
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request.
+Contributions are welcome! Please fork the repository and submit a pull request(@MohamdOmar, @Asser-Tantawy).
 
 ## License
 
