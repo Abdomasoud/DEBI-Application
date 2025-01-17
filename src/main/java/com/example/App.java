@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
+/******  cea17499-abda-487d-b721-5b34c7f1dcdf  *******/
 
     private static Scene scene;
     private static final double WIDTH = 800;

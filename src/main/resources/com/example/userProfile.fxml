@@ -25,5 +25,5 @@
     <Button text="Upload" fx:id="uploadButton" onAction="#handleUploadButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
 
     <Label fx:id="errorLabel" text="" textFill="red" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-    <Button text="Save" fx:id="saveButton" onAction="#handleSaveButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Button text="Save" fx:id="saveButton" onAction="#handleSaveButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="4"/>
 </GridPane>

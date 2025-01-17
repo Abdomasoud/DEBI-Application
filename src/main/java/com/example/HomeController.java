@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -207,9 +208,27 @@ public class HomeController {
         }
     }
 
-    @FXML
+    // @FXML
+    // private void handleProfileButtonAction() {
+    //     handleProfileClick();
+    // }
+         @FXML
     private void handleProfileButtonAction() {
-        handleProfileClick();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("userProfile.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("User Profile");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(welcomeLabel.getScene().getWindow());
+            UserProfileController controller = loader.getController();
+            controller.loadProfile(LoginController.currentUserId);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading profile view.");
+        }
     }
 
     @FXML
