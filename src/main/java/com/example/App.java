@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
+/******  cea17499-abda-487d-b721-5b34c7f1dcdf  *******/
 
     private static Scene scene;
     private static final double WIDTH = 800;
@@ -26,10 +27,18 @@ public class App extends Application {
         stage.setMinHeight(HEIGHT);
         stage.show();
     }
-    // just comment haha
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml).load());
+    }
+
+    static void setRoot(String fxml, int userId) throws IOException {
+        FXMLLoader loader = loadFXML(fxml);
+        scene.setRoot(loader.load());
+        if (fxml.equals("userProfile")) {
+            UserProfileController controller = loader.getController();
+            controller.loadProfile(userId);
+        }
     }
 
     private static FXMLLoader loadFXML(String fxml) throws IOException {

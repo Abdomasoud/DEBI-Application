@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class LoginController {
 
     @FXML
-    private TextField usernameField;
+    private TextField nameField;
 
     @FXML
     private PasswordField passwordField;
@@ -31,32 +31,35 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-        @FXML
+    @FXML
     private Label errorLabel;
+
+    public static int currentUserId;
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
-        String username = usernameField.getText();
+        String name = nameField.getText();
         String password = passwordField.getText();
 
         try (Connection connection = DatabaseUtil.getConnection()) {
-            String query = "SELECT password FROM users WHERE username = ?";
+            String query = "SELECT user_id, password_hash FROM users WHERE name = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, username);
+            statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String storedHashedPassword = resultSet.getString("password");
+                String storedHashedPassword = resultSet.getString("password_hash");
                 if (storedHashedPassword.equals(hashPassword(password))) {
-                    System.out.println("User logged in with username: " + username);
-                    switchToHome(username);
+                    System.out.println("User logged in with name: " + name);
+                    currentUserId = resultSet.getInt("user_id");
+                    switchToHome(name);
                 } else {
-                    System.out.println("Invalid username or password.");
-                    errorLabel.setText("Invalid username or password.");
+                    System.out.println("Invalid name or password.");
+                    errorLabel.setText("Invalid name or password.");
                 }
             } else {
-                System.out.println("Invalid username or password.");
-                errorLabel.setText("Invalid username or password.");
+                System.out.println("Invalid name or password.");
+                errorLabel.setText("Invalid name or password.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,12 +78,12 @@ public class LoginController {
         }
     }
 
-    private void switchToHome(String username) {
+    private void switchToHome(String name) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
             Scene scene = new Scene(loader.load());
             HomeController controller = loader.getController();
-            controller.setUserName(username);
+            controller.setUserName(name);
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
